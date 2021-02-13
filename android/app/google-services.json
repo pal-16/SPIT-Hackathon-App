@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1068694813818",
+    "project_id": "earlyalert-2f0cc",
+    "storage_bucket": "earlyalert-2f0cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068694813818:android:3a1ea7a552869fea26cfc3",
+        "android_client_info": {
+          "package_name": "com.company.terna_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068694813818-r0adpaoc4qcbnkfedeuc266fch3qs03q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdmMZcwNEOf-sjEa6aT_q8KZzRrJUxnIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068694813818-r0adpaoc4qcbnkfedeuc266fch3qs03q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
