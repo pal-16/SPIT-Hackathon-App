@@ -24,6 +24,7 @@ class _GetTravelState extends State<GetTravel> {
   }
 
   List<dynamic> text;
+  List<String> curr_cities = [];
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> routeArgs =
@@ -39,33 +40,36 @@ class _GetTravelState extends State<GetTravel> {
               return GestureDetector(
                   onTap: () => {
                         print(planslist[index]["cities"]),
+                        for (int i = 0;
+                            i < planslist[index]["cities"].length;
+                            i++)
+                          {
+                            curr_cities
+                                .add(planslist[index]["cities"][i]["name"]),
+                          },
+                        print(curr_cities),
                         Navigator.of(context)
                             .pushNamed(GetCities.routeName, arguments: {
-                          "plancities": ["Mumbai", "Delhi", "Pune"],
+                          "plancities": curr_cities,
                         }),
                         Padding(
                           padding: const EdgeInsets.all(40.0),
                         ),
                       },
-                  child: Column(children: <Widget>[
-                    Container(
-                      height: 100.0,
-                      width: 100.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.blue,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black26,
-                              offset: Offset(0, 2),
-                              blurRadius: 6.0)
-                        ],
+                  child: Card(
+                      child: Container(
+                    padding: EdgeInsets.all(30.0),
+                    child: Column(children: <Widget>[
+                      Text(
+                        planslist[index]["name"].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
                       ),
-                    ),
-                    Text(planslist[index]["name"].toString()),
-                    // Text("Hello")
-                  ]));
+                      // Text("Hello")
+                    ]),
+                  )));
             },
-            itemCount: 3));
+            itemCount: planslist.length));
   }
 }

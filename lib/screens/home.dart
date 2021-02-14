@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:terna_app/screens/createtravel.dart';
+import 'package:terna_app/screens/createtravels.dart';
 import 'package:terna_app/screens/getallplans.dart';
 //import 'package:flutter/services.dart';
 import 'package:terna_app/screens/settings.dart';
@@ -101,7 +102,7 @@ class _HomeState extends State<Home> {
           onTap: () async {
             if (action == "2") {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CreateTravel()));
+                  MaterialPageRoute(builder: (context) => CreateTravels()));
             } else if (action == "1") {
               await _saveForm();
 
@@ -149,9 +150,6 @@ class _HomeState extends State<Home> {
           children: [
             homeCard("assets/images/1.png", "View Travel Plans", "1"),
             homeCard("assets/images/2.png", "Create Travel Plan", "2"),
-            homeCard("assets/images/3.png", "Get weather", "3"),
-            homeCard("assets/images/4.png", "Evaluate Feedback Forms",
-                "sentimental"),
           ],
         ),
       );

@@ -15,6 +15,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'screens/getallcities.dart';
+import 'dart:math';
 
 FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
@@ -88,6 +89,10 @@ class _MyConditionalWidgetState extends State<MyConditionalWidget> {
       String authtoken = await prefs.get("token");
       print(authtoken);
       List<String> city = [];
+      var rng = new Random();
+
+      var x = rng.nextInt(100);
+
       city.add(res['location'].toString());
       final response = await http.post(
         url,
@@ -97,7 +102,7 @@ class _MyConditionalWidgetState extends State<MyConditionalWidget> {
           "Content-Type": "application/json",
         },
         body: json.encode({
-          "name": "Sms Generated Plan",
+          "name": "Sms Generated Plan" + x.toString(),
           "start_date": res['date'],
           "end_date": "2021-12-31",
           "cities": city,

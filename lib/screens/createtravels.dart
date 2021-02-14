@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:terna_app/screens/getallplans.dart';
 import '../global.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -93,7 +94,9 @@ class _CreateTravelsState extends State<CreateTravels> {
     TextEditingController period = TextEditingController();
     TextEditingController stock = TextEditingController();
     TextEditingController name = TextEditingController();
-    TextEditingController time = TextEditingController();
+    TextEditingController timeh = TextEditingController();
+    TextEditingController timem = TextEditingController();
+
     TextEditingController dosage = TextEditingController();
     Map<String, dynamic> holder = {};
     return showDialog(
@@ -169,7 +172,7 @@ class _CreateTravelsState extends State<CreateTravels> {
             keyboardType: TextInputType.text,
           ),
           TextFormField(
-            controller: time,
+            controller: timeh,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.blue),
@@ -187,7 +190,30 @@ class _CreateTravelsState extends State<CreateTravels> {
                 borderSide: BorderSide(color: Colors.red),
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              labelText: "Time",
+              labelText: "Time in hours",
+            ),
+            keyboardType: TextInputType.number,
+          ),
+          TextFormField(
+            controller: timem,
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue),
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue),
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              labelText: "Time in minutes",
             ),
             keyboardType: TextInputType.number,
           ),
@@ -224,7 +250,8 @@ class _CreateTravelsState extends State<CreateTravels> {
               holder["period"] = period.text;
               holder["stock"] = stock.text;
               holder["name"] = name.text;
-              holder["time"] = "01:17:00";
+              holder["time"] = "09:27:00";
+              // (timeh.text + ":" + timem.text + ":00").toString();
               holder["dosage"] = dosage.text;
               finalholder.add(holder);
               Navigator.of(context).pop();
@@ -383,8 +410,8 @@ class _CreateTravelsState extends State<CreateTravels> {
                   onPressed: () {
                     _saveForm();
                     //  Navigator.pop(context);
-                    //   Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => Screen2()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => GetTravel()));
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -414,7 +441,7 @@ class _CreateTravelsState extends State<CreateTravels> {
                   Card(
                       child: (pills != null)
                           ? Column(children: [
-                              for (var i in pills) Card(child: i['name'])
+                              for (var i in pills) Card(child: Text(i['name']))
                             ])
                           : Text("")),
                 ]),

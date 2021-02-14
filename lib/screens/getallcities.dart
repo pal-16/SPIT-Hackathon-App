@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:terna_app/screens/getallplans.dart';
 import '../global.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -38,29 +39,24 @@ class _GetCitiesState extends State<GetCities> {
         ),
         content: ListView(children: <Widget>[
           Text(
-            cloud,
+            "Chances of Rain:" + cloud.toString(),
           ),
           SizedBox(
             height: 10,
           ),
           Text(
-            humidity,
+            "Humidity Level:" + humidity.toString(),
           ),
           SizedBox(
             height: 10,
           ),
           Text(
-            cloud,
+            "Temperature:" + temp.toString(),
           ),
           SizedBox(
             height: 10,
           ),
-          Text(
-            temp,
-          ),
-          SizedBox(
-            height: 10,
-          ),
+          Text(message),
         ]),
         actions: <Widget>[
           FlatButton(
@@ -75,6 +71,8 @@ class _GetCitiesState extends State<GetCities> {
       ),
     );
   }
+
+  String message;
 
   Future<void> loadWeather(String cityname) async {
     Map<String, String> app_headers = {
@@ -117,12 +115,20 @@ class _GetCitiesState extends State<GetCities> {
     speed = weatherData['wind']['speed'];
     print("CloudCover:${weatherData['clouds']['all']}");
     cloud = weatherData['clouds']['all'];
-    print("print:${weatherData['main']['pressure']}");
-    print("AQI:${pollenData['data'][0]['Count']['grass_pollen']}");
-    print("AQI:${pollenData['data'][0]['Count']['tree_pollen']}");
-    print("AQI:${pollenData['data'][0]['Count']['weed_pollen']}");
-    print("AQI:${pollenData['data'][0]['Risk']['tree_pollen']}");
-    print("AQI:${pollenData['data'][0]['Risk']['weed_pollen']}");
+    //print("print:${weatherData['main']['pressure']}");
+    //print("AQI:${pollenData['data'][0]['Count']['grass_pollen']}");
+    //print("AQI:${pollenData['data'][0]['Count']['tree_pollen']}");
+    //print("AQI:${pollenData['data'][0]['Count']['weed_pollen']}");
+    //print("AQI:${pollenData['data'][0]['Risk']['tree_pollen']}");
+    //print("AQI:${pollenData['data'][0]['Risk']['weed_pollen']}");
+
+    if (temp < 60) {
+      message =
+          "The temparture is below 60 Fahrenheit, you might want to wear warm clothes";
+    } else if (temp > 95) {
+      message =
+          "The temparture is above 95 Fahrenheit, you might want to wear  clothes";
+    }
   }
 
   List<dynamic> text;
@@ -147,6 +153,6 @@ class _GetCitiesState extends State<GetCities> {
                   onTap: () => {showCities(plancities[index])});
             },
             padding: EdgeInsets.all(0.0),
-            itemCount: 3));
+            itemCount: plancities.length));
   }
 }

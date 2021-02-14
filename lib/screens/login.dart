@@ -76,7 +76,7 @@ class _LoginState extends State<Login> {
         }),
       );
       print(response.body);
-      final jsonData = json.decode(response.body);
+      final jsonData = jsonDecode(response.body);
       User.email = jsonData['email'];
       print("==============================");
       print(User.email);

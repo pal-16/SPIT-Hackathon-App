@@ -250,7 +250,7 @@ class MyAppDrawer extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => Upload()));
                 },
                 title: Text(
-                  "Upload",
+                  "Create Travel Plan",
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -261,34 +261,11 @@ class MyAppDrawer extends StatelessWidget {
                   color: Colors.white,
                 ),
                 title: Text(
-                  "Summarizer",
+                  "Get all Travel Plans",
                   style: TextStyle(
                     color: Colors.white,
                   ),
                 )),
-            User.typeOfUser == 'company'
-                ? ListTile(
-                    leading: Icon(
-                      Icons.keyboard_voice,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      "Generate Voice Form",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ))
-                : ListTile(
-                    leading: Icon(
-                      Icons.keyboard_voice,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      "Fill Voice Form",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    )),
             ListTile(
                 leading: Icon(
                   Icons.exit_to_app,
