@@ -52,7 +52,6 @@ class _CreateTravelState extends State<CreateTravel> {
   }
 
   void initState() {
-//    CombedController = TextEditingController(text: BuyerRequest.combed.toString());
     super.initState();
   }
 

@@ -1,4 +1,6 @@
 //import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:terna_app/screens/createtravel.dart';
 import 'package:terna_app/screens/getallplans.dart';
@@ -6,9 +8,11 @@ import 'package:terna_app/screens/getallplans.dart';
 import 'package:terna_app/screens/settings.dart';
 import '../widgets/app_drawer.dart';
 import '../screens/getallplans.dart';
-// hex code for primary color - 8f94fb
 import '../screens/weather.dart';
 import '../global.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class Home extends StatefulWidget {
   static const routeName = '/home';
@@ -31,7 +35,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _saveForm() async {
-    /* final String url = urlInitial + "api/travel_plans/";
+    final String url = urlInitial + "api/travel_plans/";
     print(url);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String authtoken = await prefs.get("token");
@@ -45,14 +49,14 @@ class _HomeState extends State<Home> {
       },
     );
     print(response.headers);
-    print(response.body);*/
-    cities = ["Mumbai", "Punee", "Delhi"];
-    //  var finalplans = json.decode(response.body);
-    //print(finalplans);
-    /*for (int i = 0; i < 2; i++) {
-      var city = finalplans['plans'][i]['cities'];
-      print(city);
-    }*/
+    print(response.body);
+    dynamic res = jsonDecode(response.body);
+    print(res["plans"]);
+    print(res["plans"][0]["name"]);
+    // plans = res["plans"];
+    Navigator.of(context).pushNamed(GetTravel.routeName, arguments: {
+      "planslist": res["plans"],
+    });
   }
 
   Widget appBar(scaffoldkey) {
@@ -100,8 +104,9 @@ class _HomeState extends State<Home> {
                   MaterialPageRoute(builder: (context) => CreateTravel()));
             } else if (action == "1") {
               await _saveForm();
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetTravel()));
+
+              //   Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => GetTravel()));
             } else {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Weather()));

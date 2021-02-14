@@ -8,6 +8,7 @@ import 'dart:io';
 import '../global.dart';
 import './weather.dart';
 import 'dart:async';
+import '../screens/getallcities.dart';
 
 class GetTravel extends StatefulWidget {
   static const routeName = '/getplans';
@@ -17,53 +18,17 @@ class GetTravel extends StatefulWidget {
 
 class _GetTravelState extends State<GetTravel> {
   final _formKey = GlobalKey<FormState>();
-
+  List<dynamic> planslist;
   void initState() {
     super.initState();
-  }
-
-  Future<void> loadWeather() async {
-    Map<String, String> app_headers = {
-      'x-api-key': 'QyyU0RkCkX7NVkRTrZNyq1ATTrosnJVL6rG6qC46',
-      'Content-type': 'application/json'
-    };
-
-    var weather = await http.get(
-      'http://api.openweathermap.org/data/2.5/weather?q=Bengaluru&appid=26bacc76e3b1b456766796b413dd26b6',
-    );
-    var airQuality = await http.get(
-      'https://api.waqi.info/feed/Bengaluru/?token=a425003f4a4b4cf3019b1b419b7a7ec84e3ca363',
-    );
-
-    var pollen = await http.get(
-        'https://api.ambeedata.com/latest/pollen/by-place?place=Bengaluru',
-        headers: app_headers);
-
-    var weatherData = jsonDecode(weather.body);
-    var airQualityData = jsonDecode(airQuality.body);
-    print("=====hii");
-    print(airQualityData);
-    var pollenData = jsonDecode(pollen.body);
-    print("hellopalak");
-    print(pollenData);
-    print(airQualityData['data']['aqi']);
-    print(airQualityData['data']['iaqi']['pm10']['v']);
-    print(airQualityData['data']['iaqi']['pm25']['v']);
-    print("Temperature:${weatherData['main']['temp']}");
-    print("Humidity:${weatherData['main']['humidity']}");
-    print("WindSpeed:${weatherData['wind']['speed']}");
-    print("CloudCover:${weatherData['clouds']['all']}");
-    print("print:${weatherData['main']['pressure']}");
-    print("AQI:${pollenData['data'][0]['Count']['grass_pollen']}");
-    print("AQI:${pollenData['data'][0]['Count']['tree_pollen']}");
-    print("AQI:${pollenData['data'][0]['Count']['weed_pollen']}");
-    print("AQI:${pollenData['data'][0]['Risk']['tree_pollen']}");
-    print("AQI:${pollenData['data'][0]['Risk']['weed_pollen']}");
   }
 
   List<dynamic> text;
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> routeArgs =
+        ModalRoute.of(context).settings.arguments;
+    planslist = routeArgs["planslist"];
     return Scaffold(
         appBar: AppBar(
           title: Text("Get all your Travel Plans"),
@@ -72,12 +37,34 @@ class _GetTravelState extends State<GetTravel> {
         body: ListView.builder(
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
-                  child: Text(cities[index].toString()),
                   onTap: () => {
-                        loadWeather(),
-                        //  Navigator.push(context,
-                        //    MaterialPageRoute(builder: (context) => Weather())),
-                      });
+                        print(planslist[index]["cities"]),
+                        Navigator.of(context)
+                            .pushNamed(GetCities.routeName, arguments: {
+                          "plancities": ["Mumbai", "Delhi", "Pune"],
+                        }),
+                        Padding(
+                          padding: const EdgeInsets.all(40.0),
+                        ),
+                      },
+                  child: Column(children: <Widget>[
+                    Container(
+                      height: 100.0,
+                      width: 100.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blue,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(0, 2),
+                              blurRadius: 6.0)
+                        ],
+                      ),
+                    ),
+                    Text(planslist[index]["name"].toString()),
+                    // Text("Hello")
+                  ]));
             },
             itemCount: 3));
   }

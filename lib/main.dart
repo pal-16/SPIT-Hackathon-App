@@ -7,12 +7,14 @@ import 'screens/signup.dart';
 import 'screens/home.dart';
 import 'screens/upload.dart';
 import 'screens/createtravel.dart';
+import 'screens/createtravels.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'global.dart';
 import 'package:sms/sms.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
+import 'screens/getallcities.dart';
 
 FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
@@ -43,7 +45,10 @@ class _TernaAppState extends State<TernaApp> {
         Login.routeName: (ctx) => Login(),
         Upload.routeName: (ctx) => Upload(),
         GetTravel.routeName: (ctx) => GetTravel(),
-        CreateTravel.routeName: (ctx) => CreateTravel()
+        CreateTravel.routeName: (ctx) => CreateTravel(),
+        CreateTravels.routeName: (ctx) => CreateTravels(),
+        GetCities.routeName: (ctx) => GetCities(),
+        // TestMyApp.routeName: (ctx) => TestMyApp(),
       },
       home: MyConditionalWidget(),
     );
